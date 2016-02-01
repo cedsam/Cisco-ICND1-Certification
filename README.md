@@ -3,7 +3,9 @@
 I bought and Im using real lab, including the following:
 
 
-3 routers: Cisco 2620XM (128 mo RAM; 32 mo System Flash under IOS Version 12.2(7r))
+3 routers: Cisco 2620XM (128 mo RAM; 32 mo System Flash under IOS Version 12.2(7r)) + 4x WIC-1T.
+
+
 3 switchs: Cisco C2950 (IOS Version 12.1(22)EA6)
 
 
