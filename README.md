@@ -1,6 +1,6 @@
 # My road to the cisco certification
 
-I buy and Im using real lab, including the following:
+I bought and Im using real lab, including the following:
 
 
 3 routers: Cisco 2620XM (128 mo RAM; 32 mo System Flash under IOS Version 12.2(7r))
