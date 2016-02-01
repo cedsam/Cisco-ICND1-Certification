@@ -1,0 +1,93 @@
+!
+version 12.2
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname R1
+!
+!
+!
+enable secret 5
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+username samardzija secret 5
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name samardzija.com
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex full
+ speed 100
+!
+interface FastEthernet0/0.1
+ encapsulation dot1Q 1 native
+ ip address 10.0.0.4 255.224.0.0
+!
+interface FastEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 10.64.255.254 255.224.0.0
+!
+interface FastEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 10.32.255.254 255.224.0.0
+!
+interface FastEthernet0/0.30
+ encapsulation dot1Q 30
+ ip address 10.96.255.254 255.224.0.0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+ login local
+!
+line aux 0
+!
+line vty 0
+ logging synchronous
+ login local
+ transport input ssh
+line vty 1 4
+ login
+ transport input none
+line vty 5 15
+ login
+ transport input none
+!
+!
+!
+end

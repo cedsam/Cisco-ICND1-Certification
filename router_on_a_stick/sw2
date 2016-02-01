@@ -1,0 +1,240 @@
+!
+version 12.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname SW2
+!
+enable secret 5
+!
+ip ssh version 2
+ip domain-name samardzija.com
+!
+username samardzija secret 5
+!
+vtp domain southwark
+vtp mode transparent
+!
+!
+spanning-tree mode pvst
+!
+vlan 10
+ name HeadHumanResources
+!
+vlan 20
+ name CustomerService
+!
+vlan 30
+ name AccountancyService
+!
+vlan 1000
+ name blackhole
+!
+interface FastEthernet0/1
+ switchport access vlan 10
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/2
+ switchport access vlan 10
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/3
+ switchport access vlan 10
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/4
+ switchport access vlan 20
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/5
+ switchport access vlan 20
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/6
+ switchport access vlan 20
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/7
+ switchport access vlan 30
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/8
+ switchport access vlan 30
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/9
+ switchport access vlan 30
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/10
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/11
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/12
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/13
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/14
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/15
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/16
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/17
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/18
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/19
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/20
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/21
+ switchport mode access
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/22
+ description SW2->R1
+ switchport trunk allowed vlan 1,10,20,30
+ switchport mode trunk
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/23
+ switchport trunk allowed vlan 1,10,20,30
+ switchport mode trunk
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface FastEthernet0/24
+ switchport trunk allowed vlan 1,10,20,30
+ switchport mode trunk
+ switchport nonegotiate
+ duplex full
+ speed 100
+ no cdp enable
+!
+interface Vlan1
+ ip address 10.0.0.2 255.224.0.0
+ shutdown
+!
+!
+!
+!
+line con 0
+ logging synchronous
+ login local
+ exec-timeout 0 0
+!
+line vty 0
+ exec-timeout 0 0
+ logging synchronous
+ login local
+ transport input none
+line vty 1 4
+ login
+ transport input none
+line vty 5 15
+ login
+ transport input none
+!
+!
+end

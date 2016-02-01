@@ -1,0 +1,85 @@
+
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname R2
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5
+!
+no aaa new-model
+!
+resource policy
+!
+no network-clock-participate slot 1 
+no network-clock-participate wic 0 
+ip subnet-zero
+ip cef
+!
+!
+no ip dhcp use vrf connected
+!
+!
+no ip ips deny-action ips-interface
+ip domain name samardzija.com
+ip ssh version 2
+!
+!
+!
+!
+username samardzija secret 5
+!
+! 
+!
+!
+!
+interface FastEthernet0/0
+ description R2->SW2
+ ip address 192.168.1.62 255.255.255.224
+ speed 100
+ full-duplex
+!
+interface Serial0/0
+ description R2->R1
+ ip address 192.168.1.125 255.255.255.224
+ no fair-queue
+ clockrate 2000000
+!
+ip classless
+ip route 192.168.1.0 255.255.255.224 192.168.1.126
+ip route 192.168.1.64 255.255.255.224 192.168.1.126
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+control-plane
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+ login local
+line aux 0
+line vty 0 1
+ exec-timeout 0 0
+ logging synchronous
+ login local
+ transport input ssh
+line vty 2 4
+ login
+ transport input none
+line vty 5 181
+ login
+ transport input none
+!
+!
+end
