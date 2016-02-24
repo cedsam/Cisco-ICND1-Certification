@@ -1,11 +1,12 @@
+
 !
 version 12.1
 no service pad
 service timestamps debug uptime
 service timestamps log uptime
-service password-encryption
+no service password-encryption
 !
-hostname sw3
+hostname SW3
 !
 enable secret 5
 !
@@ -26,15 +27,24 @@ spanning-tree extend system-id
 !
 !
 !
+vlan 30,40 
+!
+vlan 4093
+ name INTERNET
+!
+vlan 4094
+ name blackhole
+!
 interface FastEthernet0/1
+ switchport access vlan 4094
  switchport mode access
  switchport nonegotiate
- switchport port-security mac-address sticky
  speed 100
  duplex full
  no cdp enable
 !
 interface FastEthernet0/2
+ switchport access vlan 30
  switchport mode access
  switchport nonegotiate
  speed 100
@@ -42,6 +52,7 @@ interface FastEthernet0/2
  no cdp enable
 !
 interface FastEthernet0/3
+ switchport access vlan 40
  switchport mode access
  switchport nonegotiate
  speed 100
@@ -49,6 +60,7 @@ interface FastEthernet0/3
  no cdp enable
 !
 interface FastEthernet0/4
+ switchport access vlan 4094
  switchport mode access
  switchport nonegotiate
  speed 100
@@ -56,6 +68,7 @@ interface FastEthernet0/4
  no cdp enable
 !
 interface FastEthernet0/5
+ switchport access vlan 4094
  switchport mode access
  switchport nonegotiate
  speed 100
@@ -63,6 +76,7 @@ interface FastEthernet0/5
  no cdp enable
 !
 interface FastEthernet0/6
+ switchport access vlan 4094
  switchport mode access
  switchport nonegotiate
  speed 100
@@ -70,6 +84,7 @@ interface FastEthernet0/6
  no cdp enable
 !
 interface FastEthernet0/7
+ switchport access vlan 4094
  switchport mode access
  switchport nonegotiate
  speed 100
@@ -77,6 +92,7 @@ interface FastEthernet0/7
  no cdp enable
 !
 interface FastEthernet0/8
+ switchport access vlan 4094
  switchport mode access
  switchport nonegotiate
  speed 100
@@ -84,6 +100,7 @@ interface FastEthernet0/8
  no cdp enable
 !
 interface FastEthernet0/9
+ switchport access vlan 4094
  switchport mode access
  switchport nonegotiate
  speed 100
@@ -91,6 +108,7 @@ interface FastEthernet0/9
  no cdp enable
 !
 interface FastEthernet0/10
+ switchport access vlan 4094
  switchport mode access
  switchport nonegotiate
  speed 100
@@ -98,6 +116,7 @@ interface FastEthernet0/10
  no cdp enable
 !
 interface FastEthernet0/11
+ switchport access vlan 4093
  switchport mode access
  switchport nonegotiate
  speed 100
@@ -105,31 +124,43 @@ interface FastEthernet0/11
  no cdp enable
 !
 interface FastEthernet0/12
- switchport mode access
+ switchport trunk allowed vlan 1,10,20,30,40,4093
+ switchport mode trunk
  switchport nonegotiate
  speed 100
  duplex full
  no cdp enable
 !
 interface Vlan1
- ip address 192.168.1.65 255.255.255.224
+ no ip address
+ no ip route-cache
+ shutdown
+!
+interface Vlan30
+ ip address 172.16.0.57 255.255.255.248
  no ip route-cache
 !
-ip http server
+no ip http server
 no cdp run
 !
 line con 0
+ exec-timeout 0 0
  logging synchronous
  login local
 line vty 0
+ exec-timeout 0 0
  logging synchronous
  login local
  transport input ssh
 line vty 1 4
- no login
+ exec-timeout 0 0
+ logging synchronous
+ login local
  transport input none
 line vty 5 15
- no login
+ exec-timeout 0 0
+ logging synchronous
+ login local
  transport input none
 !
 !

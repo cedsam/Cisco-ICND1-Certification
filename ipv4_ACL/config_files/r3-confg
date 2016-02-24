@@ -1,0 +1,162 @@
+
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R3
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5
+!
+no aaa new-model
+!
+resource policy
+!
+no network-clock-participate slot 1 
+no network-clock-participate wic 0 
+ip subnet-zero
+ip cef
+!
+!
+no ip dhcp use vrf connected
+ip dhcp excluded-address 172.16.0.49
+ip dhcp excluded-address 172.16.0.54
+ip dhcp excluded-address 172.16.0.57
+ip dhcp excluded-address 172.16.0.62
+!
+ip dhcp pool VLAN_30
+   network 172.16.0.56 255.255.255.248
+   default-router 172.16.0.62 
+   dns-server 8.8.8.8 
+!
+ip dhcp pool VLAN_40
+   network 172.16.0.48 255.255.255.248
+   default-router 172.16.0.54 
+   dns-server 8.8.8.8 
+!
+!
+no ip ips deny-action ips-interface
+ip domain name samardzija.com
+ip ssh version 2
+!
+!
+!
+!
+username samardzija secret 5
+!
+! 
+!
+!
+!
+interface Loopback3
+ ip address 3.3.3.3 255.255.255.255
+!
+interface FastEthernet0/0
+ no ip address
+ speed 100
+ full-duplex
+ no cdp enable
+!
+interface FastEthernet0/0.30
+ encapsulation dot1Q 30
+ ip address 172.16.0.62 255.255.255.248
+ ip access-group ICMP_VLAN30 in
+ ip nat inside
+ ip virtual-reassembly
+ no snmp trap link-status
+ no cdp enable
+!
+interface FastEthernet0/0.40
+ encapsulation dot1Q 40
+ ip address 172.16.0.54 255.255.255.248
+ ip access-group ICMP_VLAN40 in
+ ip nat inside
+ ip virtual-reassembly
+ no snmp trap link-status
+ no cdp enable
+!
+interface FastEthernet0/0.4093
+ encapsulation dot1Q 4093
+ ip address dhcp
+ ip nat outside
+ ip virtual-reassembly
+ no snmp trap link-status
+ no cdp enable
+!
+interface Serial0/0
+ ip address 172.16.0.254 255.255.255.252
+ ip nat inside
+ ip virtual-reassembly
+ no fair-queue
+ clockrate 2000000
+ no cdp enable
+!
+router ospf 1
+ router-id 3.3.3.3
+ log-adjacency-changes
+ passive-interface default
+ no passive-interface Serial0/0
+ network 172.16.0.48 0.0.0.7 area 0
+ network 172.16.0.56 0.0.0.7 area 0
+ network 172.16.0.252 0.0.0.3 area 0
+ network 192.168.1.0 0.0.0.255 area 0
+ default-information originate
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 192.168.1.1
+!
+no ip http server
+no ip http secure-server
+ip nat pool LIVEBOX_DHCP 192.168.1.33 192.168.1.33 netmask 255.255.255.0
+ip nat inside source list INSIDE_NAT pool LIVEBOX_DHCP overload
+!
+ip access-list standard INSIDE_NAT
+ permit 172.16.0.0 0.0.0.31
+ permit 172.16.0.32 0.0.0.15
+ permit 172.16.0.48 0.0.0.7
+ permit 172.16.0.56 0.0.0.7
+!
+ip access-list extended ICMP_VLAN30
+ deny   icmp 172.16.0.56 0.0.0.7 172.16.0.252 0.0.0.3
+ deny   icmp 172.16.0.56 0.0.0.7 172.16.0.248 0.0.0.3
+ permit ip any any
+ip access-list extended ICMP_VLAN40
+ deny   icmp 172.16.0.48 0.0.0.7 172.16.0.252 0.0.0.3
+ deny   icmp 172.16.0.48 0.0.0.7 172.16.0.248 0.0.0.3
+ permit ip any any
+!
+no cdp run
+!
+!
+control-plane
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+ login local
+line aux 0
+line vty 0
+ exec-timeout 0 0
+ logging synchronous
+ login local
+ transport input ssh
+line vty 1 4
+ exec-timeout 0 0
+ logging synchronous
+ login local
+ transport input none
+line vty 5 181
+ exec-timeout 0 0
+ logging synchronous
+ login local
+ transport input none
+!
+!
+end

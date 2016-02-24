@@ -6,11 +6,11 @@ service timestamps debug uptime
 service timestamps log uptime
 service password-encryption
 !
-hostname sw1
+hostname sw3
 !
 enable secret 5
 !
-username samardzija password 7
+username samardzija secret 5
 ip subnet-zero
 !
 ip domain-name samardzija.com
@@ -29,9 +29,8 @@ spanning-tree extend system-id
 !
 interface FastEthernet0/1
  switchport mode access
- switchport port-security
+ switchport nonegotiate
  switchport port-security mac-address sticky
- switchport port-security mac-address sticky 0000.0000.00000
  speed 100
  duplex full
  no cdp enable
@@ -113,92 +112,8 @@ interface FastEthernet0/12
  duplex full
  no cdp enable
 !
-interface FastEthernet0/13
- switchport mode access
- switchport nonegotiate
- speed 100
- duplex full
- no cdp enable
-!
-interface FastEthernet0/14
- switchport mode access
- switchport nonegotiate
- speed 100
- duplex full
- no cdp enable
-!
-interface FastEthernet0/15
- switchport mode access
- switchport nonegotiate
- speed 100
- duplex full
- no cdp enable
-!
-interface FastEthernet0/16
- switchport mode access
- switchport nonegotiate
- speed 100
- duplex full
- no cdp enable
-!
-interface FastEthernet0/17
- switchport mode access
- switchport nonegotiate
- speed 100
- duplex full
- no cdp enable
-!
-interface FastEthernet0/18
- switchport mode access
- switchport nonegotiate
- speed 100
- duplex full
- no cdp enable
-!
-interface FastEthernet0/19
- switchport mode access
- switchport nonegotiate
- speed 100
- duplex full
- no cdp enable
-!
-interface FastEthernet0/20
- switchport mode access
- switchport nonegotiate
- speed 100
- duplex full
- no cdp enable
-!
-interface FastEthernet0/21
- switchport mode access
- switchport nonegotiate
- speed 100
- duplex full
- no cdp enable
-!
-interface FastEthernet0/22
- switchport mode access
- switchport nonegotiate
- speed 100
- duplex full
- no cdp enable
-!
-interface FastEthernet0/23
- switchport mode access
- switchport nonegotiate
- speed 100
- duplex full
- no cdp enable
-!
-interface FastEthernet0/24
- switchport mode access
- switchport nonegotiate
- speed 100
- duplex full
- no cdp enable
-!
 interface Vlan1
- ip address 192.168.1.1 255.255.255.252
+ ip address 192.168.1.65 255.255.255.224
  no ip route-cache
 !
 ip http server

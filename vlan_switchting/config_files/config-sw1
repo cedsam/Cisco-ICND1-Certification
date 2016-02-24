@@ -39,7 +39,7 @@ interface FastEthernet0/1
  switchport mode access
  switchport port-security
  switchport port-security mac-address sticky
- switchport port-security mac-address sticky 0000.0000.00000
+ switchport port-security mac-address sticky 00xx.xxxx.xxxx 
  speed 100
  duplex full
 no cdp enable
