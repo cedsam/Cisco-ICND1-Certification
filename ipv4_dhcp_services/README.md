@@ -1,5 +1,5 @@
 # Topic : DHCP server with IOS <br />
-![alt tag](https://raw.githubusercontent.com/cedsam/Cisco-ICNDCertification/master/ipv4_dhcp_services/network_blueprint.pdf)
+![alt tag](https://raw.githubusercontent.com/cedsam/Cisco-ICNDCertification/master/ipv4_dhcp_services/network_blueprint.png)
  <br />
 ## About <br />
 How to implement DHCP server on IOS ? <br />

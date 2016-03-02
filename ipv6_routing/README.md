@@ -1,5 +1,5 @@
 # Topic : IPv6 routing protocols (static, OSPFv3) <br />
-![alt tag](https://raw.githubusercontent.com/cedsam/Cisco-ICNDCertification/master/ipv6_routing/network_blueprint.pdf)
+![alt tag](https://raw.githubusercontent.com/cedsam/Cisco-ICNDCertification/master/ipv6_routing/network_blueprint.png)
  <br />
 ## About <br />
 How to implement static and dynamic routes ? <br />

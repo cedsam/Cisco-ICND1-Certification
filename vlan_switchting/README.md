@@ -1,5 +1,5 @@
 # Topic : VLAN <br />
-![alt tag](https://raw.githubusercontent.com/cedsam/Cisco-ICNDCertification/master/vlan_switchting/network_blueprint.pdf)
+![alt tag](https://raw.githubusercontent.com/cedsam/Cisco-ICNDCertification/master/vlan_switchting/network_blueprint.png)
  <br />
 ## About <br />
 How works VLAN in real life? <br />
