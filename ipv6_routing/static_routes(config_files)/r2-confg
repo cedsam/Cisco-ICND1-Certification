@@ -1,0 +1,108 @@
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R2
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5
+!
+!
+resource policy
+!
+no aaa new-model
+no network-clock-participate slot 1
+no network-clock-participate wic 0
+ip subnet-zero
+!
+!
+!
+!
+ip cef
+no ip domain lookup
+ip domain name samardzija.com
+ip ssh version 2
+ipv6 unicast-routing
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username samardzija secret 5
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ full-duplex
+ speed 100
+
+ ipv6 address FD48:1A1:DEA3::/64 eui-64
+ no cdp enable
+!
+interface Serial0/0
+ no ip address
+ ipv6 address FD35:23AF:AA0C::2/64
+ no fair-queue
+ clock rate 2000000
+ no cdp enable
+!
+ip classless
+!
+!
+no ip http server
+no ip http secure-server
+!
+no cdp run
+ipv6 route FD10:ACD4:AB86::/64 FD35:23AF:AA0C::1
+ipv6 route FDAC:8C9B:EA82::/64 FD35:23AF:AA0C::1
+ipv6 route FDBD:BAE4:2876::/64 FD35:23AF:AA0C::1
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+ login local
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ logging synchronous
+ login local
+line vty 5 181
+ exec-timeout 0 0
+ logging synchronous
+ login local
+!
+!
+end
