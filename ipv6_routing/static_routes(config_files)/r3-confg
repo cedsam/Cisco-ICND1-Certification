@@ -23,9 +23,6 @@ ip subnet-zero
 !
 !
 ip cef
-no ip domain lookup
-ip domain name samardzija.com
-ip ssh version 2
 ipv6 unicast-routing
 !
 !
@@ -53,13 +50,13 @@ username samardzija secret 5
 !
 interface FastEthernet0/0
  no ip address
- speed 100
- full-duplex
- ipv6 address FD10:ACD4:AB86::/64 eui-64
+ duplex auto
+ speed auto
+ ipv6 address FD51:9E12:1FCE:3::/64 eui-64
 !
 interface Serial0/0
  no ip address
- ipv6 address FDBD:BAE4:2876::2/64
+ ipv6 address FD51:9E12:1FCE:5::2/64
  no fair-queue
  clock rate 2000000
 !
@@ -70,9 +67,9 @@ no ip http server
 no ip http secure-server
 !
 no cdp run
-ipv6 route FD35:23AF:AA0C::/64 FDBD:BAE4:2876::1
-ipv6 route FD48:1A1:DEA3::/64 FDBD:BAE4:2876::1
-ipv6 route FDAC:8C9B:EA82::/64 FDBD:BAE4:2876::1
+ipv6 route FD51:9E12:1FCE:1::/64 FD51:9E12:1FCE:5::1
+ipv6 route FD51:9E12:1FCE:2::/64 FD51:9E12:1FCE:5::1
+ipv6 route FD51:9E12:1FCE:4::/64 FD51:9E12:1FCE:5::1
 !
 !
 !
@@ -92,20 +89,11 @@ line con 0
  logging synchronous
  login local
 line aux 0
-line vty 0
- exec-timeout 0 0
- logging synchronous
- login local
- transport input ssh
-line vty 1 4
- exec-timeout 0 0
- logging synchronous
- login local
+line vty 0 4
+ login
  transport input none
 line vty 5 181
- exec-timeout 0 0
- logging synchronous
- login local
+ login
  transport input none
 !
 !
